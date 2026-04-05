@@ -159,6 +159,21 @@
 .dcs-footer{padding:48px 24px 24px;}.dcs-contact-form,.dcs-contact-sidebar{padding:40px 24px;}
 .dcs-form-row{grid-template-columns:1fr;}
 }
+
+/* MOBILE MENU */
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none;z-index:1001;}
+.hamburger span{display:block;width:26px;height:2px;background:#355e85;transition:all .3s;}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:#fff;z-index:1000;flex-direction:column;padding:100px 40px 40px;overflow-y:auto;}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#0d1520;text-decoration:none;padding:16px 0;border-bottom:1px solid #eef4f9;transition:color .2s;}
+.mobile-menu a:hover{color:#fe6d26;}
+.mobile-menu a.mob-cta{background:#fe6d26;color:#fff!important;text-align:center;padding:18px;margin-top:20px;border:none;font-size:18px;}
+.mobile-menu a.mob-cta:hover{background:#e55a15;}
+.mobile-menu-phone{font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:700;color:#fe6d26;text-decoration:none;margin-bottom:8px;display:block;}
+@media(max-width:900px){.hamburger{display:flex;}.nav-links{display:none!important;}}
 </style>
 </head>
 <body><div class="dcs">
@@ -175,7 +190,19 @@
     <a href="tel:01217989063" class="dcs-nav-phone">0121 798 9063</a>
     <a href="https://stephenpearceroberts2-design.github.io/duke-preview/free-line-review.html" class="dcs-nav-cta">Free Line Review</a>
   </div>
-</nav>
+<button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button></nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="https://stephenpearceroberts2-design.github.io/duke-preview/about-us.html">About Us</a>
+  <a href="https://stephenpearceroberts2-design.github.io/duke-preview/automation-services.html">Services</a>
+  <a href="https://stephenpearceroberts2-design.github.io/duke-preview/services-automotive.html">Automotive</a>
+  <a href="https://stephenpearceroberts2-design.github.io/duke-preview/services-process.html">Process</a>
+  <a href="https://stephenpearceroberts2-design.github.io/duke-preview/services-logistics-material-handling.html">Logistics</a>
+  <a href="https://stephenpearceroberts2-design.github.io/duke-preview/services-fmcg.html">FMCG</a>
+  <a href="https://stephenpearceroberts2-design.github.io/duke-preview/blog-post-template.html">Blog</a>
+  <a href="https://stephenpearceroberts2-design.github.io/duke-preview/contact.html">Contact Us</a>
+  <a href="https://stephenpearceroberts2-design.github.io/duke-preview/free-line-review.html" class="mob-cta">Book Free Line Review</a>
+  <a href="tel:01217989063" class="mobile-menu-phone">0121 798 9063</a>
+</div>
 
 <section class="dcs-hero">
   <div class="dcs-hero-inner">
@@ -310,4 +337,21 @@
     </div>
   </div>
 </footer>
-</div></body></html>
+</div>
+<script>
+const burger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+burger.addEventListener('click', () => {
+  burger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+  document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+});
+document.querySelectorAll('#mobileMenu a').forEach(a => {
+  a.addEventListener('click', () => {
+    burger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+});
+</script>
+</body></html>
